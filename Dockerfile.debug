@@ -5,6 +5,7 @@ ARG BRANCH=master
 
 WORKDIR /root
 RUN git clone $REPO && cd /root/pbot && git checkout $BRANCH
+WORKDIR /root/pbot
 RUN echo "" | cpan
 RUN for module in $(cat MODULES) ; do \
   cpan -i $module && echo "$module tests: PASSED " >> /root/cpanresults || echo "$module tests: FAILED" >> /root/cpanresults ; \
